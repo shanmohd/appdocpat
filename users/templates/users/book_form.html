@@ -1,0 +1,25 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class=card-body style="text-align:cenleftter; margin-left:20px;">
+    <center><h3>Appointment Details</h3></center>
+    <p class="card-text">Clinic Name :{{ clinic_name.upper }}</h5>
+    <p class="card-text">Patient Name: {{ pat_name }}</p>
+    <p class="card-text">Doctor Name: {{ doc_name }}</p>
+    <p class="card-text">Clinic Address: {{ clinic_add }}</p>
+    <p class="card-text">Patient Address: {{ add }}</p>
+    <p class="card-text">Date: {{ date }}</p>
+    <p class="card-text">Price: {{ price }}</p>
+    <p class="card-text">Disease: {{ disease }}</p>
+    <p class="card-text">Symptoms: {{ symp }}</p>
+    <p class="card-text">Slot: {{ slot }}</p>
+
+
+    <a href="#" class="btn btn-primary ">Click here to print</a>
+
+</div>
+
+
+{% endblock content %}

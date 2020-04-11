@@ -1,0 +1,69 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  .hv {
+    border: none;
+    color: white;
+    padding: 6px 65px;
+    text-align: center;
+    font-size: 16px;
+    margin: 0px 0px;
+    opacity: 1;
+    transition: 0.3s;
+  }
+  
+  .hv:hover {opacity: 0.6}
+
+
+  </style>
+
+
+<div class="row" style="display:flex; flex-direction:row; ">
+
+{% for name in doc %}
+
+
+<div class="card col-sm" style="min-width:220px; background:#2eb82e; max-width:220px;
+ text-align:center; min-height:350px;margin-left:20px;margin-top:20px">
+    <div class="card-body" >
+          <h5 class="card-title">{{ name.clinic_name.upper }}</h5>
+          <p class="card-text">Dr Name: {{ name.doctor_name }}</p>
+          <p class="card-text">Price: {{ name.price }}</p>
+          <p class="card-text">Address: {{ name.address }}</p>
+          <p class="card-text">Date: {{ name.appointment_date }}</p>
+          <p class="card-text">Posted Date: {{ name.date_posted }}</p>
+          <p class="card-text">Time From: {{ name.appointment_time_from }} AM</p>
+          <p class="card-text">To: {{ name.appointment_time_to }} AM</p>
+    </div>
+
+    <div class="button" style="margin-bottom:20px">
+      <a href="{% url 'book_appointment' name.pk %}" class="btn btn-primary ">Book an appointment</a>
+    </div>
+</div>
+
+
+{% endfor %}
+
+{% for name in passed %}
+    <div class="card col-sm" style="min-width:220px; background:#c2c2a3; max-width:220px;
+    text-align:center; min-height:350px;margin-left:20px;margin-top:20px">
+      <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+      <div class="card-body" >
+        <h5 class="card-title">{{ name.clinic_name.upper }}</h5>
+        <p class="card-text">Dr Name: {{ name.doctor_name }}</p>
+        <p class="card-text">Price: {{ name.price }}</p>
+        <p class="card-text">Address: {{ name.address }}</p>
+        <p class="card-text">Date: {{ name.appointment_date }}</p>
+        <p class="card-text">Posted Date: {{ name.date_posted }}</p>
+      </div>
+        <div class="button" style="margin-bottom:20px">
+          <button class="btn btn-primary hv">Closed</button>
+        </div>
+      </div>
+{% endfor %}
+
+
+  </div>
+{% endblock %}

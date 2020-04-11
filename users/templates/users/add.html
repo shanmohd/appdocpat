@@ -1,0 +1,51 @@
+{% extends 'users/base.html' %}
+{% block content %}
+    <div class="col ">
+            <form name="book-app" id="book_app">
+                <h4>Add an Appointment</h4>
+                <table>
+                    <tr>
+                        <th>Clinic Name</th>
+
+                        <td>
+                            <input type="text" name="clinic_name" id="clinic_name" value="" placeholder="Write your clinic name">
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <th>Address</th>
+
+                        <td>
+                            <input type="text" name="add" id="add" value="" placeholder="address">
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>
+                            <input type="date" name="date" id="date" placeholder="Date">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td>
+                            <input type="number" name="price" id="price" placeholder="price">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" class="btn-success" value="Add an appointment" id="submit">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+
+    </div>
+        <div class="col s12 m9">
+            <div id="map" style="height:80vh;"></div>
+        </div>
+
+
+{% endblock %}

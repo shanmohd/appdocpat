@@ -1,0 +1,52 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+<h2 class="account-heading"><b> {{ user.first_name.upper }}  {{ user.last_name.upper }}   </b></h2>
+
+<div class="row" style="display:flex; flex-direction:row; ">
+
+    {% for i in app_name %}
+
+<div class="card col-sm" style="min-width:220px;  background:#2eb82e; max-width:220px;text-align:center; min-height:350px;margin-left:20px; margin-top:20px">
+
+  <div class="card-body" >
+                <h5 class="card-title">{{ i.clinic_name }}</h5>
+                <p class="card-text">Patient Name: {{ i.patient }}</p>
+                <p class="card-text">Price: {{ i.price }}</p>
+                <p class="card-text">Disease: {{ i.disease }}</p>
+                <p class="card-text">Symptoms: {{ i.symptoms }}</p>
+                <p class="card-text">Patient Address: {{ i.patient_address }}</p>
+                <p class="card-text">Appointment Date: {{ i.appointment_date }}</p>
+                <p class="card-text">Slot: {{ i.slots }}</p>
+  </div>
+
+</div>
+
+{% endfor %}
+
+
+{% for i in passed %}
+
+<div class="card col-sm" style="min-width:220px;  background:#b8b894; max-width:220px;text-align:center; min-height:350px;margin-left:20px; margin-top:20px">
+
+  <div class="card-body" >
+                <h5 class="card-title">{{ i.clinic_name }}</h5>
+                <p class="card-text">Patient Name: {{ i.patient }}</p>
+                <p class="card-text">Price: {{ i.price }}</p>
+                <p class="card-text">Disease: {{ i.disease }}</p>
+                <p class="card-text">Symptoms: {{ i.symptoms }}</p>
+                <p class="card-text">Patient Address: {{ i.patient_address }}</p>
+                <p class="card-text">Appointment Date: {{ i.appointment_date }}</p>
+                <p class="card-text">Slot: {{ i.slots }}</p>
+  </div>
+
+</div>
+
+{% endfor %}
+
+  </div>
+{% endblock %}
