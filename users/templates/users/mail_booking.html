@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Hello {{ user.first_name}} {{ user.last_name }}</h1>
+
+    <div class=card-body style="text-align:cenleftter; margin-left:20px;">
+        <center><h3>Appointment Details</h3></center>
+        <p class="card-text">Clinic Name :{{ context.clinic_name.upper }}</h5>
+        <p class="card-text">Patient Name: {{ context.pat_name }}</p>
+        <p class="card-text">Doctor Name: {{ context.doc_name }}</p>
+        <p class="card-text">Clinic Address: {{ context.clinic_add }}</p>
+        <p class="card-text">Patient Address: {{ context.add }}</p>
+        <p class="card-text">Date: {{ context.date }}</p>
+        <p class="card-text">Price: {{ context.price }}</p>
+        <p class="card-text">Disease: {{ context.disease }}</p>
+        <p class="card-text">Symptoms: {{ context.symp }}</p>
+        <p class="card-text">Slot: {{ context.slot }}</p>
+    
+    
+    <a href="#" class="btn btn-primary ">Click here to print</a>
+    
+    </div>
+    
+    <a href="http://127.0.0.1:8000/">click here to redirect</a>
+</body>
+
+</html>

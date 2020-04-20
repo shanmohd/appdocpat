@@ -1,81 +1,140 @@
 {% extends 'users/base.html' %}
 {% block content %}
+<div class="container">
+    <div class="row">
+            <div class="col-md-4">
+                <div class="well-block">
+                    <div class="well-title">
+                        <h5>Appointment Details</h5>
+                    </div>
+                    <br>
+                    <div class="feature-block">
+                        <div class="feature feature-blurb-text">
+                            
+                            <div class="feature-content">
+                                <div style="text-align: center;">
+                                    <h5 class="card-title">{{ object.clinic_name.upper }}</h5>
+                                    <p class="card-text">Dr Name: {{ object.doctor_name }}</p>
+                                    <p class="card-text">Price: {{ object.price }}</p>
+                                    <p class="card-text">Address: {{ object.address }}</p>
+                                    <p class="card-text">Date: {{ object.appointment_date }}</p>
+                                    <p class="card-text">Posted Date: {{ object.date_posted }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="well-block">
+                    <div class="well-title">
+                        <h4>Book an Appointment</h4>
+                    </div>
+                    <form name="book-app" id="book_app" action="book_form" method="GET">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="name">Name</label>
+                                    <input id="pat_name" name="pat_name" type="text" placeholder="Name"
+                                        class="form-control input-md">
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="name">Doctor Name</label>
 
-<div class="article-metadata" style="text-align:center">
+                                    <input type="text" class="form-control input-md" name="doc_name" id="doc_name"
+                                        value="{{ object.doctor_name }}" placeholder="Date" readonly />
+
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="name">Clinic Name</label>
+                                    <input type="text" class="form-control input-md" name="clinic_name" id="clinic_name"
+                                        value="{{ object.clinic_name }}" placeholder="" readonly />
+                                </div>
+                            </div>
+                            <!-- Select Basic -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="time">Time Slots</label>
+                                    <select id="slots" name="slot" class="form-control input-md">
+                                        {% for i in app_data %}
+                                                {% if i in booked_slots %}
+                                                
+                                            <option style='color:tomato' value="{{ i }}" disabled> {{ i }} BOOKED </option>
+
+                                                {% else %}
+                                                <option value="{{ i }}" > {{ i }} </option>
+                                                {% endif %}
+                                                {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="name">Clinic Address</label>
+                                    <input type="text" class="form-control input-md" name="clinic_add" id="clinic_add"
+                                        value="{{ object.address }}" placeholder="" readonly />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="time">Address</label>
+                                    <input type="text" class="form-control input-md" name="add" id="add" value=""
+                                        placeholder="Your address" required />
+                                </div>
+                            </div>
 
 
-    <h5 class="card-title">{{ object.clinic_name.upper }}</h5>
-    <p class="card-text">Dr Name: {{ object.doctor_name }}</p>
-    <p class="card-text">Price: {{ object.price }}</p>
-    <p class="card-text">Address: {{ object.address }}</p>
-    <p class="card-text">Date: {{ object.appointment_date }}</p>
-    <p class="card-text">Posted Date: {{ object.date_posted }}</p>
 
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="name">Appointment Date</label>
+                                    <input type="text" class="form-control input-md" name="date" id="date"
+                                        value="{{ object.appointment_date }}" placeholder="Date" readonly />
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="name">Price</label>
+                                    <input type="number" class="form-control input-md" name="price" id="price"
+                                        value="{{ object.price }}" placeholder="price" readonly />
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="name">Symptoms</label>
+                                    <input type="text" class="form-control input-md" name="symp" id="symp" value=""
+                                        placeholder="write your symptoms" required />
+                                </div>
+                            </div>
+                            <!-- Select Basic -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="time">Disease</label>
+                                    <input type="text" class="form-control input-md" name="disease" id="disease" value=""
+                                        placeholder="Write Disease" required />
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Book An Appointment</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
 </div>
-
-<br>
-<div class="col">
-            <form name="book-app" id="book_app" action="book_form" method="GET">
-                    {% csrf_token %}
-                 <h4>Book an appointment</h4>
-
-                <div class="form-group">
-                    <label for="name">Time Slots:</label>
-                    <select name="slot" id="slots">
-                        {% for i in app_data %}
-
-                            <option value="{{ i }}">   {{ i }} </option>
-                        
-                        {% endfor %}
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="name">Patient Name:</label>
-                    <input type="text" class="form-control" name="pat_name" id="pat_name" value="" placeholder="Write your name" required >
-                </div>
-                <div class="form-group">
-                    <label for="email">Doctor Name:</label>
-                    <input type="text" class="form-control" name="doc_name" id="doc_name" value ="{{ object.doctor_name }}" placeholder="Date" readonly>
-
-                </div>
-                <div class="form-group">
-                    <label for="name">clinic Name:</label>
-                    <input type="text" class="form-control" name="clinic_name" id="clinic_name" value="{{ object.clinic_name }}" placeholder="Write your name">
-                </div>
-                <div class="form-group">
-                    <label for="name">clinic Address:</label>
-                    <input type="text" class="form-control" name="clinic_add" id="clinic_add" value="{{ object.address }}" placeholder="Write your name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Patient Address:</label>
-                    <input type="text" class="form-control" name="add" id="add" value="" placeholder="Your address" required>
-
-                </div>
-                <div class="form-group">
-                    <label for="name">Appointment Date:</label>
-                    <input type="text" class="form-control" name="date" id="date" value="{{ object.appointment_date }}" placeholder="Date" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="number">price:</label>
-                    <input type="number" class="form-control" name="price" id="price" value="{{ object.price }}"  placeholder="price" readonly >
-
-                </div>
-                <div class="form-group">
-                    <label for="text">Disease:</label>
-                    <input type="text" class="form-control" name="disease" id="disease" value="" placeholder="Write Disease" required>
-                </div>
-                <div class="form-group">
-                    <label for="text">Symptoms:</label>
-                    <input type="text" class="form-control" name="symp" id="symp" value="" placeholder="write your symptoms"required>
-                </div>
-
-
-                <button type="submit" class="btn btn-primary">Book</button>
-            </form>
-
-
-
-</div>
-
 {% endblock %}

@@ -46,19 +46,17 @@ class Add_appointments(models.Model):
     address = models.CharField(max_length=200)
     date_posted = models.DateTimeField(default=timezone.now)
     appointment_date = models.DateField(verbose_name=('Appointment Date: yyyy-mm-dd'))
-    appointment_time_from = models.PositiveIntegerField() #
-    appointment_time_to= models.PositiveIntegerField() #
     doctor_name = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     price = models.PositiveIntegerField()
 
-    def save(self, *args, **kwargs):
+    """def save(self, *args, **kwargs):
         date_today = date.today()
         date_after_month = date_today + timedelta(days=30)
         if self.appointment_date < date.today():
             raise ValidationError("The date cannot be in the past!")
         elif self.appointment_date > date_after_month:
             raise ValidationError("the date cannot be greater than a month")
-        super(Add_appointments, self).save(*args, **kwargs)
+        super(Add_appointments, self).save(*args, **kwargs)"""
 
     def __str__(self):
         return f"{self.clinic_name} by {self.doctor_name}"

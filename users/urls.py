@@ -5,7 +5,7 @@ from .views import (Book_app,
                     Book_appointment,
                     Profile,
                     Add_appointmentCreateView,
-                    HelloTemplate,
+                    bookedAppTemplateView,
                     Show_appListView)
 
 
@@ -27,27 +27,31 @@ urlpatterns = [
 
     path('password-reset/', auth_views.PasswordResetView.as_view(
         template_name='users/password_reset.html'),
-         name="password_reset"),
+        name="password_reset"),
 
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(
         template_name='users/password_reset_done.html'),
-         name="password_reset_done"),
+        name="password_reset_done"),
 
     path('password-reset-confirm/<uidb64>/<token>/',
-         auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'),
+         auth_views.PasswordResetConfirmView.as_view(
+             template_name='users/password_reset_confirm.html'),
          name="password_reset_confirm"),
 
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='users/password_reset_complete.html'),
-         name="password_reset_complete"),
+        name="password_reset_complete"),
 
     path('book/', Book_app.as_view(), name='book'),
 
-    path('book/book_appointment/<int:pk>/', Book_appointment.as_view(), name='book_appointment'),
+    path('book/book_appointment/<int:pk>/',
+         Book_appointment.as_view(), name='book_appointment'),
 
-    path('book/book_appointment/<int:pk>/book_form/', HelloTemplate.as_view(), name='book_form'),
+    path('book/book_appointment/<int:pk>/book_form/',
+         bookedAppTemplateView.as_view(), name='book_form'),
 
-    path('add_appointment/', Add_appointmentCreateView.as_view(success_url="/",), name='add_form'),
+    path('add_appointment/',
+         Add_appointmentCreateView.as_view(success_url="/",), name='add_form'),
 
     path('show_app/', Show_appListView.as_view(), name='show_app'),
 

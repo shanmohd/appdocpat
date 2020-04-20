@@ -1,5 +1,8 @@
 from django.contrib import admin
 from django.urls import path,include
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -7,14 +10,9 @@ urlpatterns = [
 
 ]
 
-"""path('', user_views.index, name="index"),
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-   path('register/', user_views.signup, name='register'),
-
-   path('registeraspatient/', user_views.signup_patient, name='register_patient'),
-
-   path('registerasdoctor/', user_views.signup_doctor, name='register_doctor'),
-
-   path('book/', Book_app.as_view(), name='book'),
-
-   path('book/book_appointment/', user_views.book_appointment, name='book_appointment'),"""
+urlpatterns = [
+    # ... the rest of your URLconf goes here ...
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,34 +1,44 @@
 {% extends "users/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="content-section" style="background:#c2c2a3">
-    <div class="media">
-        <!--<img class="rounded-circle account-img" src="{{ user.profile.image.url }}">-->
-        <div class="media-body">
-            <p class="account-heading"> Username : <b> {{ user.username }}    </b></p>
-            <p class="text-secondary">   First Name : <b> {{ user.first_name }}  </b></p>
-            <p class="text-secondary">   Last Name  : <b> {{ user.last_name }}   </b></p>
-            <p class="text-secondary">   Email     : <b> {{ user.email }}       </b></p>
-            {% if user.gender == "M" %}
-                <p class="text-secondary">   gender  :    <b>MALE</b></p>
-            {% endif %}
-
-            {% if user.gender == "F" %}
-                <p class="text-secondary">   gender  :    <b>FEMALE</b></p>
-            {% endif %}
-
-            {% if user.gender == "None" %}
-            <p class="text-secondary">   gender  :    <b>None</b></p>
-            {% endif %}
-
-            <p class="text-secondary">   DOB  :       <b> {{ user.date_of_birth }}     </b></p>
-
-            {% if user.role == 2 %}
-                <p class="text-secondary"> Department : <b> {{ user.doctor.department }}  </b></p>
-                <p class="text-secondary"> Education  : <b> {{ user.doctor.education }}   </b></p>
-            {% endif %}
+<div class="container">
+    <div class="" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">More About {{ user.first_name }} </h4>
+                </div>
+                <div class="modal-body" >
+                    <center>
+                        {% load static %}
+                        <img src="{% static 'users/default.png' %}" name="aboutme" width="140" height="140" border="0"
+                            class="img-circle"></a>
+                        <h3 class="media-heading">{{ user.first_name }} {{ user.last_name }}</h3>
+                        <div class="media-body">
+                            <p class="account-heading"> Username : <b> {{ user.username }}    </b></p>
+                            <p class="text-secondary">   Email     : <b> {{ user.email }}       </b></p>
+                            {% if user.gender == "M" %}
+                                <p class="text-secondary">   gender  :    <b>MALE</b></p>
+                            {% endif %}
+                
+                            {% if user.gender == "F" %}
+                                <p class="text-secondary">   gender  :    <b>FEMALE</b></p>
+                            {% endif %}
+                
+                            {% if user.gender == "None" %}
+                            <p class="text-secondary">   gender  :    <b>None</b></p>
+                            {% endif %}
+                
+                            <p class="text-secondary">   DOB  :       <b> {{ user.date_of_birth }}     </b></p>
+                
+                            {% if user.role == 2 %}
+                                <p class="text-secondary"> Department : <b> {{ user.doctor.department }}  </b></p>
+                                <p class="text-secondary"> Education  : <b> {{ user.doctor.education }}   </b></p>
+                            {% endif %}
+                        </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 {% endblock content %}

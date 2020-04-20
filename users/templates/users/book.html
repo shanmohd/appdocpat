@@ -21,12 +21,15 @@
 
 
 <div class="row" style="display:flex; flex-direction:row; ">
+  {% if not doc and not passed %} 
+   <h3 style="color:red"> Sorry! There are currently no appointments available</h3>
+    {% endif %}
 
 {% for name in doc %}
 
 
-<div class="card col-sm" style="min-width:220px; background:#2eb82e; max-width:220px;
- text-align:center; min-height:350px;margin-left:20px;margin-top:20px">
+<div class="card col-sm" style="min-width:220px; background:#33ccff; max-width:220px;
+ text-align:center; min-height:420px; max-height:420px; margin-left:20px;margin-top:20px">
     <div class="card-body" >
           <h5 class="card-title">{{ name.clinic_name.upper }}</h5>
           <p class="card-text">Dr Name: {{ name.doctor_name }}</p>
@@ -34,11 +37,9 @@
           <p class="card-text">Address: {{ name.address }}</p>
           <p class="card-text">Date: {{ name.appointment_date }}</p>
           <p class="card-text">Posted Date: {{ name.date_posted }}</p>
-          <p class="card-text">Time From: {{ name.appointment_time_from }} AM</p>
-          <p class="card-text">To: {{ name.appointment_time_to }} AM</p>
     </div>
 
-    <div class="button" style="margin-bottom:20px">
+    <div class="button" style="margin-bottom:10px">
       <a href="{% url 'book_appointment' name.pk %}" class="btn btn-primary ">Book an appointment</a>
     </div>
 </div>
