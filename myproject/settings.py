@@ -27,7 +27,7 @@ SECRET_KEY = '6n^p#@6i_p-7cujr!e4z!qlf-1yla4@ma(us^xep-%ud$d7bt_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['appdocpat.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['docpatappointment.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
