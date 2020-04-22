@@ -48,6 +48,7 @@ class Add_appointments(models.Model):
     appointment_date = models.DateField(verbose_name=('Appointment Date: yyyy-mm-dd'))
     doctor_name = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     price = models.PositiveIntegerField()
+    available_slots = models.CharField(max_length=200,default="",null=True,blank=True)
 
     """def save(self, *args, **kwargs):
         date_today = date.today()

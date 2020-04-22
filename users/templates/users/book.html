@@ -26,10 +26,10 @@
     {% endif %}
 
 {% for name in doc %}
+{% if name.available_slots %}
 
-
-<div class="card col-sm" style="min-width:220px; background:#33ccff; max-width:220px;
- text-align:center; min-height:420px; max-height:420px; margin-left:20px;margin-top:20px">
+<div class="card col-sm" style="min-width:300px; background:#33ccff; max-width:300px;
+ text-align:center; min-height:440px; max-height:400px; margin-left:20px;margin-top:20px">
     <div class="card-body" >
           <h5 class="card-title">{{ name.clinic_name.upper }}</h5>
           <p class="card-text">Dr Name: {{ name.doctor_name }}</p>
@@ -37,6 +37,15 @@
           <p class="card-text">Address: {{ name.address }}</p>
           <p class="card-text">Date: {{ name.appointment_date }}</p>
           <p class="card-text">Posted Date: {{ name.date_posted }}</p>
+          <div class="card-body" style="padding-bottom: 0px; padding-top:0px">
+             
+            <small class="card-text">
+              Slots: {% for sl in name.available_slots %}
+                        {{ sl }} | 
+
+                      {% endfor %}
+            </small>
+      </div>
     </div>
 
     <div class="button" style="margin-bottom:10px">
@@ -44,7 +53,27 @@
     </div>
 </div>
 
+{% else %}
+<div class="card col-sm" style="min-width:300px; background:#c2c2a3; max-width:300px;
+ text-align:center; min-height:440px; max-height:400px; margin-left:20px;margin-top:20px">
+    <div class="card-body" >
+          <h5 class="card-title">{{ name.clinic_name.upper }}</h5>
+          <p class="card-text">Dr Name: {{ name.doctor_name }}</p>
+          <p class="card-text">Price: {{ name.price }}</p>
+          <p class="card-text">Address: {{ name.address }}</p>
+          <p class="card-text">Date: {{ name.appointment_date }}</p>
+          <p class="card-text">Posted Date: {{ name.date_posted }}</p>
+          <div class="card-body" style="padding-bottom: 0px; padding-top:0px">
+            <h5>Slots are full</h5>
+      </div>
+    </div>
 
+    <div class="button" style="margin-bottom:10px">
+      <a href="#" class="btn btn-primary ">Slots are full</a>
+    </div>
+</div>
+
+{% endif %}
 {% endfor %}
 
 {% for name in passed %}

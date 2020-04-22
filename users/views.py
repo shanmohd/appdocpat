@@ -95,8 +95,42 @@ class Book_app(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     def get_queryset(self):
         now = timezone.now()
+        li = []
+        for i in range(11, 12+1):
+            if str(i)!="12":        
+                li.append([str(i) + ":00 - " + str(i) + ":30"])
+                li.append([str(i) + ":30 - " + str(i + 1) + ":00"])
+            else:
+                li.append([str(i) + ":00 - " + str(i) + ":30"])
+                li.append([str(i) + ":30 - " + str(1) + ":00"])
+        for i in range(2, 6):
+            li.append(["0" + str(i) + ":00 - " + "0" + str(i) + ":30"])
+            li.append(["0" + str(i) + ":30 - " + "0" + str(i + 1) + ":00"])
+        di = {}
+        for i in li:
+            t = {i[0]: i[0]}
+            di.update(t)
+        
         upcoming = Add_appointments.objects.filter(
             appointment_date__gte=now).order_by('appointment_date')
+        send_data=[]
+        
+        for i in upcoming:
+            av_sl = Add_appointments.objects.get(pk=i.pk)
+            doc = av_sl.doctor_name
+            dd = av_sl.appointment_date
+            ap_dt = Appointment.objects.all().filter(doctor=doc,appointment_date=dd)
+            booked={}
+            for k in ap_dt:
+                booked.update({k.slots : k.slots})
+        
+            final_booked=[]
+            for j in di:
+                if j not in booked:
+                    final_booked.append(j[:6])
+            i.available_slots = final_booked
+            
+            
         return list(upcoming)
 
     def get_context_data(self, **kwargs):
@@ -120,16 +154,22 @@ class Book_appointment(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         shan = super().get_context_data(**kwargs)
         li = []
-        for i in range(11, 12):
-            li.append([str(i) + ":00 - " + str(i) + ":30"])
-            li.append([str(i) + ":30 - " + str(i + 1) + ":00"])
-        for i in range(1, 6):
+        for i in range(11, 12+1):
+            if str(i)!="12":        
+                li.append([str(i) + ":00 - " + str(i) + ":30"])
+                li.append([str(i) + ":30 - " + str(i + 1) + ":00"])
+            else:
+                li.append([str(i) + ":00 - " + str(i) + ":30"])
+                li.append([str(i) + ":30 - " + str(1) + ":00"])
+        for i in range(2, 6):
             li.append(["0" + str(i) + ":00 - " + "0" + str(i) + ":30"])
             li.append(["0" + str(i) + ":30 - " + "0" + str(i + 1) + ":00"])
         di = {}
         for i in li:
             t = {i[0]: i[0]}
             di.update(t)
+
+
         
         doc=shan['object']
         dc_name = doc.doctor_name
